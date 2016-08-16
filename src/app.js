@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { articles } from './fixtures';
 
-import HelloWorldComponent from './components/HelloWorldComponent';
+import Article from './components/Article';
 
-render(<HelloWorldComponent />, document.getElementById('container'));
+render(<Article article = { articles[0] }/>, document.getElementById('container'));
