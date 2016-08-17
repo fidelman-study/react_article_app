@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Comment from './Comment';
 
 export default class Article extends Component {
 
@@ -8,7 +9,17 @@ export default class Article extends Component {
 
     render() {
         const { article } = this.props;
-        const body = this.state.isOpen ? <section>{article.text}</section> : null;
+
+        const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
+
+        const body = this.state.isOpen ? 
+                <section>
+                    {article.text}
+                    <ul>
+                        {commentItems}
+                    </ul>
+                        
+                </section> : null;
         return (
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
