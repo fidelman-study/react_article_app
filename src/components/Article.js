@@ -4,7 +4,9 @@ import Comment from './Comment';
 export default class Article extends Component {
 
     state = {
-        isOpen: false
+        isOpenArticle: false,
+        isOpenComments: false,
+        commentTogglerName: 'Show comments'
     };
 
     render() {
@@ -12,25 +14,32 @@ export default class Article extends Component {
 
         const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
 
-        const body = this.state.isOpen ? 
+        const body = this.state.isOpenArticle ? 
                 <section>
                     {article.text}
-                    <ul>
-                        {commentItems}
-                    </ul>
-                        
+                    <br/>
+                    {commentItems.length ? <a onClick = {this.toggleComments} href = "#">{this.state.commentTogglerName}</a> : null}
+                    {this.state.isOpenComments ? <ul>{commentItems}</ul> : null}
                 </section> : null;
         return (
             <div>
-                <h3 onClick = {this.handleClick}>{article.title}</h3>
+                <h3 onClick = {this.toggleArticle}>{article.title}</h3>
                 {body}
             </div>
         )
     }
 
-    handleClick = (ev) => {
+    toggleArticle = (ev) => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpenArticle: !this.state.isOpenArticle
         });
+    };
+
+    toggleComments = (ev) => {
+        this.setState({
+            isOpenComments: !this.state.isOpenComments,
+            commentTogglerName: this.state.commentTogglerName == 'Show comments' ? 'Hide comments' : 'Show comments'
+        });
+        ev.preventDefault();
     };
 }
