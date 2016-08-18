@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
 
+//Не перегружай компоненты - стоит разнести на Article и CommentList
 export default class Article extends Component {
 
     state = {
         isOpenArticle: false,
         isOpenComments: false,
+        //Лучше хранить минимальный стейт - ведь текс зависит от isOpenComments, его достаточно
         commentTogglerName: 'Show comments'
     };
 
