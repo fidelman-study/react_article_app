@@ -6,9 +6,7 @@ export default class Article extends Component {
 
     state = {
         isOpenArticle: false,
-        isOpenComments: false,
-        //Лучше хранить минимальный стейт - ведь текс зависит от isOpenComments, его достаточно
-        commentTogglerName: 'Show comments'
+        isOpenComments: false
     };
 
     render() {
@@ -20,7 +18,7 @@ export default class Article extends Component {
                 <section>
                     {article.text}
                     <br/>
-                    {commentItems.length ? <a onClick = {this.toggleComments} href = "#">{this.state.commentTogglerName}</a> : null}
+                    {commentItems.length ? <a onClick = {this.toggleComments} href = "#">{this.state.isOpenComments ? 'Hide comments' : 'Show comments'}</a> : null}
                     {this.state.isOpenComments ? <ul>{commentItems}</ul> : null}
                 </section> : null;
         return (
@@ -39,8 +37,7 @@ export default class Article extends Component {
 
     toggleComments = (ev) => {
         this.setState({
-            isOpenComments: !this.state.isOpenComments,
-            commentTogglerName: this.state.commentTogglerName == 'Show comments' ? 'Hide comments' : 'Show comments'
+            isOpenComments: !this.state.isOpenComments
         });
         ev.preventDefault();
     };
