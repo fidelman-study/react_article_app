@@ -10,22 +10,23 @@ export default class CommentList extends Component {
 	render() {
 		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
 
-		return (
-			<div>
-				{commentItems.length 
+		const toggler = commentItems.length 
 					? 
 					<a onClick = {this.toggleComments} href = "#">
 						{this.state.isOpenComments ? 'Hide comments' : 'Show comments'}
 					</a> 
 					:
-					null
-				}
-				{this.state.isOpenComments
+					null;
+		const comment = this.state.isOpenComments
 					?
 					<ul>{commentItems}</ul>
 					:
-					null
-				}
+					null;
+
+		return (
+			<div>
+				{toggler}
+				{comment}
 			</div>
 		);
 	}
