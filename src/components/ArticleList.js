@@ -3,12 +3,21 @@ import Article from './Article';
 
 export default class ArticleList extends Component {
 
+	state = {
+        openArticleId: null
+    }
+
 	render() {
 		
 		const articleItems = this.props.articles.map(
 			articleObject => (
 				<li key = {articleObject.id}>
-					<Article comments = {articleObject.comments ? articleObject.comments : []} article = {articleObject}/> 
+					<Article 
+						comments = {articleObject.comments ? articleObject.comments : []} 
+						article = {articleObject} 
+						isOpen = {this.state.openArticleId === articleObject.id}
+						toggleOpen = {this.toggleOpenArticle(articleObject.id)}
+					/> 
 				</li>));
 
 		return (
@@ -17,5 +26,12 @@ export default class ArticleList extends Component {
 	        </ul>
 	    );
 	}
+
+	 toggleOpenArticle = id => ev => {
+        if (ev) ev.preventDefault()
+        this.setState({
+            openArticleId: id
+        })
+    }
 	    
 }
