@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
 import CommentList from './CommentList';
+import toggleOpen from '../decorators/toggleOpen';
 
 //Не перегружай компоненты - стоит разнести на Article и CommentList
-export default class Article extends Component {
+class Article extends Component {
 
-    state = {
-        isOpen: false
-    };
 
     render() {
-        const { article } = this.props;
+        const { comments, article, toggleOpen, isOpen } = this.props;
 
-        const body = this.state.isOpen ? 
+        const body = isOpen ? 
             <section>
                 {article.text}
-                <CommentList comments = {this.props.comments} />
+                <CommentList comments = {comments} />
             </section> : null;
         return (
             <div>
-                <h3 onClick = {this.toggleOpen}>{article.title}</h3>
+                <h3 onClick = {toggleOpen}>{article.title}</h3>
                 {body}
             </div>
         )
     };
 
-    toggleOpen = (ev) => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-        if (ev) ev.preventDefault();
-    }
 }
+
+export default toggleOpen(Article);
