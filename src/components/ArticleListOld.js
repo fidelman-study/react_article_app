@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, creatClass } from 'react';
 import Article from './Article';
-import toggleOpenArticle from '../decorators/toggleOpenArticle';
+import toggleOpenArticle from '../mixins/toggleOpenArticle';
 
-class ArticleList extends Component {
+const ArticleList = creatClass({
+
+	mixins: [toggleOpenArticle],
 
 	render() {
 
@@ -25,20 +27,7 @@ class ArticleList extends Component {
 	        </ul>
 	    );
 	}   
-}
+});
 
 
-/*
- * при указании openArticleId isRequired - ругается
- * это изз того, что эти свойства образуются после декоратора?
- */
-
-ArticleList.propTypes = {
-	articles: PropTypes.array,
-	toggleOpenArticle: PropTypes.func.isRequired,
-	openArticleId: PropTypes.string
-};
-
-
-
-export default toggleOpenArticle(ArticleList);
+export default ArticleList;

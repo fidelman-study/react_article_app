@@ -17,7 +17,8 @@ export default class Comment extends Component {
 
 Comment.propTypes = {
 	comment: PropTypes.shape({
-		user: PropTypes.string,
-		text: PropTypes.string.isRequired
+		user: PropTypes.string.isRequired,
+		text: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired
 	}).isRequired
 };
