@@ -4,21 +4,21 @@ import Comment from './Comment';
 export default class CommentList extends Component {
 
 	state = {
-        isOpenComments: false
-	}
+        isOpen: false
+    };
 
 	render() {
 		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
 
 		const toggler = commentItems.length 
-					? 
-					<a onClick = {this.toggleComments} href = "#">
-						{this.state.isOpenComments ? 'Hide comments' : 'Show comments'}
-					</a> 
-					:
-					null;
+			? 
+			<a onClick = {this.toggleOpen} href = "#">
+				{this.state.isOpen ? 'Hide comments' : 'Show comments'}
+			</a> 
+			:
+			null;
 
-		const comment = this.state.isOpenComments
+		const comment = this.state.isOpen
 					?
 					<ul>{commentItems}</ul>
 					:
@@ -32,11 +32,11 @@ export default class CommentList extends Component {
 		);
 	}
 
-	toggleComments = (ev) => {
+	 toggleOpen = (ev) => {
         this.setState({
-            isOpenComments: !this.state.isOpenComments
+            isOpen: !this.state.isOpen
         });
-        ev.preventDefault();
-    };
+        if (ev) ev.preventDefault();
+    }
 }
 

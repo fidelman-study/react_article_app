@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
-import CommentList from './CommentList';
+import CommentList from './CommentListOld';
 
 //Не перегружай компоненты - стоит разнести на Article и CommentList
 export default class Article extends Component {
 
     state = {
-        isOpenArticle: false
+        isOpen: false
     };
 
     render() {
         const { article } = this.props;
 
-        const body = this.state.isOpenArticle ? 
-                <section>
-                    {article.text}
-                    <CommentList comments = {this.props.comments} />
-                </section> : null;
+        const body = this.state.isOpen ? 
+            <section>
+                {article.text}
+                <CommentList comments = {this.props.comments} />
+            </section> : null;
         return (
             <div>
-                <h3 onClick = {this.toggleArticle}>{article.title}</h3>
+                <h3 onClick = {this.toggleOpen}>{article.title}</h3>
                 {body}
             </div>
         )
-    }
-
-    toggleArticle = (ev) => {
-        this.setState({
-            isOpenArticle: !this.state.isOpenArticle
-        });
     };
+
+    toggleOpen = (ev) => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+        if (ev) ev.preventDefault();
+    }
 }

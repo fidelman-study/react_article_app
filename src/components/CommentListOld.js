@@ -1,26 +1,24 @@
 import React , { Component, createClass } from 'react';
 import Comment from './Comment';
+import toggleOpen from '../mixins/toggleOpen';
+
 
 const CommentList = createClass({
 
-	getInitialState() {
-		return {
-			isOpenComments: false
-		}
-	},
+	mixins: [toggleOpen],
 
 	render() {
 		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
 
 		const toggler = commentItems.length 
 					? 
-					<a onClick = {this.toggleComments} href = "#">
-						{this.state.isOpenComments ? 'Hide comments' : 'Show comments'}
+					<a onClick = {this.toggleOpen} href = "#">
+						{this.state.isOpen ? 'Hide comments' : 'Show comments'}
 					</a> 
 					:
 					null;
 
-		const comment = this.state.isOpenComments
+		const comment = this.state.isOpen
 					?
 					<ul>{commentItems}</ul>
 					:
@@ -32,14 +30,10 @@ const CommentList = createClass({
 				{comment}
 			</div>
 		);
-	},
+	}
 
-	toggleComments(ev) {
-        this.setState({
-            isOpenComments: !this.state.isOpenComments
-        });
-        ev.preventDefault();
-    }
 
 });
+
+export default CommentList;
 
