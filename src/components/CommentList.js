@@ -17,6 +17,7 @@ export default class CommentList extends Component {
 					</a> 
 					:
 					null;
+
 		const comment = this.state.isOpenComments
 					?
 					<ul>{commentItems}</ul>
@@ -38,3 +39,4 @@ export default class CommentList extends Component {
         ev.preventDefault();
     };
 }
+
