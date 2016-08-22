@@ -4,7 +4,7 @@ export default {
 			openArticleId: null
 		}
 	},
-
+	//Это просто литеральная нотация объекта, сдесь нельзя писать toggleOpenArticle = ..., надо toggleOpenArticle: ...
 	toggleOpenArticle = id => ev => {
         if (ev) ev.preventDefault();
 
