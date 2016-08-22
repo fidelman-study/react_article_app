@@ -32,6 +32,7 @@ class ArticleList extends Component {
  * при указании openArticleId isRequired - ругается
  * это изз того, что эти свойства образуются после декоратора?
  */
+ //ты инициализируешь openArticleId: null. И оно ругаеться, что обязаетльно должна быть строка, а не приходит
 
 ArticleList.propTypes = {
 	articles: PropTypes.array,
