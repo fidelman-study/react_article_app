@@ -4,7 +4,22 @@ import toggleOpenArticle from '../decorators/toggleOpenArticle';
 
 class ArticleList extends Component {
 
+
+	componentWillMount() {
+		console.log('WillMount');
+	}
+
+	componentDidMount() {
+		console.log('DidMount')
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log('WillReceiveProps')
+	}
+
 	render() {
+		
+		console.log('Render');
 
 		const { openArticleId, articles, toggleOpenArticle } = this.props;
 

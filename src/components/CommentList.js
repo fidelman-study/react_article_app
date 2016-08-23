@@ -4,6 +4,18 @@ import toggleOpen from '../decorators/toggleOpen';
 
 class CommentList extends Component {
 
+	componentDidMount() {
+		console.log('didM');
+	}
+
+	componentWillUnmount() {
+		console.log('didUn');
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log('updating');
+	}
+
 	render() {
 		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
 

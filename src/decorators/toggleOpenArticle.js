@@ -20,7 +20,7 @@ export default (Component) => {
 
 
 		render() {
-			return <Component {...this.props} openArticleId = {this.state.openArticleId} toggleOpenArticle = {this.toggleOpenArticle} />
+			return <Component {...this.props} openArticleId = {this.state.openArticleId} toggleOpenArticle = {this.toggleOpenArticle}  />
 		}
 	}
 }
