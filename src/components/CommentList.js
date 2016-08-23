@@ -1,20 +1,10 @@
 import React , { Component, PropTypes } from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
+import ComponentCount from './ComponentCount';
+
 
 class CommentList extends Component {
-
-	componentDidMount() {
-		console.log('didM');
-	}
-
-	componentWillUnmount() {
-		console.log('didUn');
-	}
-
-	componentWillReceiveProps(nextProps) {
-		console.log('updating');
-	}
 
 	render() {
 		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
@@ -23,6 +13,7 @@ class CommentList extends Component {
 			? 
 			<a onClick = {this.props.toggleOpen} href = "#">
 				{this.props.isOpen ? 'Hide comments' : 'Show comments'}
+				<ComponentCount count = {commentItems.length}/>
 			</a> 
 			:
 			null;
