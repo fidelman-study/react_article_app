@@ -5,18 +5,11 @@ export default {
 		}
 	},
 
-	toggleOpenArticle = id => ev => {
-        if (ev) ev.preventDefault();
-
-    	this.setState({
-            openArticleId: this.state.openArticleId === id ? null : id
-        })
-	        
-    }
 	
-	/*
+	
+	
     toggleOpenArticle(id) {
-    	return function(ev) {
+    	return (ev) => {
     		if (ev) ev.preventDefault();
 
 	    	this.setState({
@@ -24,5 +17,5 @@ export default {
 	        })
     	}
     }
-    */
+    
 }
