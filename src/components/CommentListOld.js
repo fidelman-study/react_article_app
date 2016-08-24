@@ -36,4 +36,3 @@ const CommentList = createClass({
 });
 
 export default CommentList;
-

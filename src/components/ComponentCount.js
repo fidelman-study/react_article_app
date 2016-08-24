@@ -3,9 +3,9 @@ import React, { Component, PropTypes } from 'react';
 export default class ComponentCount extends Component {
 	render() {
 		return (
-			<div>
+			<strong>
 				{this.props.count}
-			</div>
+			</strong>
 		);
 	}
 
