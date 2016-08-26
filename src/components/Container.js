@@ -14,6 +14,9 @@ import 'react-day-picker/lib/style.css';
 import moment from 'moment';
 import ru_local from '../locale_ru'; // русскоязычная локализация
 
+import Counter from './Counter';
+
+
 class Container extends Component {
     static propTypes = {
 
@@ -36,6 +39,7 @@ class Container extends Component {
 
         return (
             <div>
+                <Counter />
                 <Select options = {options} value={this.state.selected} onChange = {this.handleChange} multi={true}/>
                 <DayPicker
                     numberOfMonths = { 2 }

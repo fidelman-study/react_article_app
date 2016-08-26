@@ -36,6 +36,7 @@
     "react-day-picker": "^2.4.1",
     "react-dom": "^15.3.0",
     "react-select": "^1.0.0-beta14",
+    "redux": "^3.5.2",
     "style-loader": "^0.13.1"
   }
 }
