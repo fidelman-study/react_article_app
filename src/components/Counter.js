@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
-import store from '../store';
 import { increment }  from '../AC/counter';
+import { connect } from 'react-redux';
 
-export default class Counter extends Component {
-
-	state = {
-		count: store.getState().count
-	};
-
-
-	componentWillMount() {
-		store.subscribe(this.handleStoreChange);
-	};
-
-	handleStoreChange = () => {
-		this.setState({
-			count: store.getState().count
-		})
-	};
+class Counter extends Component {
 
 	render() {
 		return (
 			<div>
-				<h1>{this.state.count}</h1>
+				<h1>{this.props.count}</h1>
 				<a href="#" onClick = {this.handleIncrement}>increment me</a>
 			</div>
 		);
@@ -30,9 +15,15 @@ export default class Counter extends Component {
 
 	handleIncrement = ev => {
 		ev.preventDefault();
-		const action = increment();
-		store.dispatch(action);
+		this.props.wrappedIncrement();
 	};
 }
 // чистая функция - когда внутри только пропсы и стейты
 // Рендер должен быть чистой функцией
+
+export default connect((state) => {
+	const { count } = state;
+	return { count };
+}, {
+	wrappedIncrement: increment
+})(Counter);
