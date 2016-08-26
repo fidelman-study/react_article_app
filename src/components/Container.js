@@ -3,6 +3,7 @@ import ArticleList from './ArticleList';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 // для импортирования стилей необходим style-loader и css-loader
+// да
 
 import JqueryComponent from './JqueryComponent';
 import {findDOMNode } from 'react-dom';
@@ -39,6 +40,7 @@ class Container extends Component {
                 <DayPicker
                     numberOfMonths = { 2 }
                     onDayClick = {this.handleDayClick}
+                    {/*Лучше эту функцию сохранить как метод, а то и код в JSX лишний, и каждый раз пересоздается*/}
                     selectedDays = { day => DateUtils.isDayInRange(day, { from, to }) }
                     locale={ 'ru' }
                     localeUtils={ ru_local }
