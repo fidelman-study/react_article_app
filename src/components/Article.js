@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import CommentList from './CommentList';
 import toggleOpen from '../decorators/toggleOpen';
+import { connect } from 'react-redux'
+import { deleteArticle } from '../AC/articles'
 
 //Не перегружай компоненты - стоит разнести на Article и CommentList
 class Article extends Component {
@@ -16,10 +18,17 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
+                <a href = "#" onClick = {this.handleDelete}>delete article</a>
                 {body}
             </div>
         )
     };
+
+    handleDelete = ev => {
+         ev.preventDefault()
+         const { deleteArticle, article } = this.props
+         deleteArticle(article.id)
+     }
 
 };
 
@@ -34,4 +43,4 @@ Article.propTypes = {
     isOpen: PropTypes.bool.isRequired
 };
 
-export default Article;
+export default connect(null, { deleteArticle })(Article);

@@ -15,6 +15,7 @@ import moment from 'moment';
 import ru_local from '../locale_ru'; // русскоязычная локализация
 
 import Counter from './Counter';
+import { connect } from 'react-redux';
 
 
 class Container extends Component {
@@ -89,8 +90,11 @@ class Container extends Component {
     }
 }
 
-export default Container
-
+export default connect((state) => {
+    const { articles } = state
+    return { articles }
+}
+)(Container) 
 
 /*
  Вставка сторонних компонентов

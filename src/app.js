@@ -8,6 +8,6 @@ import Container from './components/Container'
 
 render(
 	<Provider store = { store }>
-		<Container articles = {articles} />
+		<Container />
 	</Provider>
 	, document.getElementById('container'));
