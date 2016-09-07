@@ -17,8 +17,13 @@ class Article extends Component {
             </section> : null;
         return (
             <div>
-                <h3 onClick = {toggleOpen}>{article.title}</h3>
-                <a href = "#" onClick = {this.handleDelete}>delete article</a>
+                <h3 style={{cursor: 'pointer'}}
+                    onClick = {toggleOpen}>
+                    {article.title + ' '}
+                    <a href = "#" onClick = {this.handleDelete}>
+                        delete
+                    </a>
+                </h3>
                 {body}
             </div>
         )

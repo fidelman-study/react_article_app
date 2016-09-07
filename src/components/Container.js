@@ -17,6 +17,8 @@ import ru_local from '../locale_ru'; // русскоязычная локали�
 import Counter from './Counter';
 import { connect } from 'react-redux';
 
+import { changeSelect } from '../AC/selector';
+
 
 class Container extends Component {
     static propTypes = {
@@ -24,7 +26,6 @@ class Container extends Component {
     };
 
     state = {
-        selected: null,
         from: null,
         to: null
     };
@@ -37,11 +38,19 @@ class Container extends Component {
 
         const { from, to } = this.state;
         moment.locale('ru');
-
         return (
             <div>
                 <Counter />
-                <Select options = {options} value={this.state.selected} onChange = {this.handleChange} multi={true}/>
+                <Select options = {options} value={this.props.selected} onChange = {this.handleChange} multi={true}/>
+                <hr/>
+                <em>DayPicker</em>
+                { !from && !to && <p>Пожалуйста, выберите  <strong>первый день</strong>.</p> }
+                { from && !to && <p>Пожалуйста, выберите  <strong>последний день</strong>. Первый день - {moment(from).format('LL')}</p> }
+                { from && to &&
+                <p>
+                    Вы выбрали даты с { moment(from).format('LL') } до { moment(to).format('LL') } <a href="#" onClick = {this.handleResetClick}>Выбрать заново</a>
+                </p>
+                }
                 <DayPicker
                     numberOfMonths = { 2 }
                     onDayClick = {this.handleDayClick}
@@ -51,15 +60,6 @@ class Container extends Component {
                 />
                 <ArticleList articles = {this.props.articles} />
                 {/*<JqueryComponent items = {this.props.articles} ref= {this.getJQ} />*/}
-                <hr/>
-                <em>DayPicker</em>
-                { !from && !to && <p>Пожалуйста, выберите  <strong>первый день</strong>.</p> }
-                { from && !to && <p>Пожалуйста, выберите  <strong>последний день</strong>. Первый день - {moment(from).format('LL')}</p> }
-                { from && to &&
-                    <p>
-                        Вы выбрали даты с { moment(from).format('LL') } до { moment(to).format('LL') } <a href="#" onClick = {this.handleResetClick}>Выбрать заново</a>
-                    </p>
-                }
             </div>
         )
     }
@@ -70,9 +70,7 @@ class Container extends Component {
     };
 
     handleChange = (selected) => {
-        this.setState({
-            selected
-        })
+        this.props.changeSelect(selected);
     }
 
     handleDayClick = (e, day) => {
@@ -90,10 +88,11 @@ class Container extends Component {
 }
 
 export default connect((state) => {
-    const { articles } = state
-    return { articles }
-}
-)(Container) 
+    const { articles, selected } = state;
+    return { articles, selected };
+}, {
+    changeSelect
+})(Container)
 
 /*
  Вставка сторонних компонентов

@@ -9,7 +9,5 @@ import { articles as defaultArticles} from '../fixtures';
  			return articles.filter(article => article.id != payload.id);
      }
 
-     
- 
      return articles
  } 

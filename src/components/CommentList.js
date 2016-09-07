@@ -12,7 +12,7 @@ class CommentList extends Component {
 		const toggler = commentItems.length 
 			? 
 			<a onClick = {this.props.toggleOpen} href = "#">
-				{this.props.isOpen ? 'Hide comments' : 'Show comments'}
+				{this.props.isOpen ? 'Hide comments ' : 'Show comments '}
 				<ComponentCount count = {commentItems.length}/>
 			</a> 
 			:
