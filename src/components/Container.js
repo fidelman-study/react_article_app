@@ -18,6 +18,7 @@ import Counter from './Counter';
 import { connect } from 'react-redux';
 
 import { changeSelect } from '../AC/selector';
+import { dayPicker, resetDayPicker } from '../AC/daypicker';
 
 
 class Container extends Component {
@@ -25,39 +26,41 @@ class Container extends Component {
 
     };
 
-    state = {
-        from: null,
-        to: null
-    };
-
     render() {
+
         const options = this.props.articles.map(article => ({
             label: article.title,
             value: article.id
         }));
 
-        const { from, to } = this.state;
-        moment.locale('ru');
-        return (
+        const { from, to } = this.props.daypicker;
+
+        const dayPicker =
             <div>
-                <Counter />
-                <Select options = {options} value={this.props.selected} onChange = {this.handleChange} multi={true}/>
-                <hr/>
                 <em>DayPicker</em>
-                { !from && !to && <p>Пожалуйста, выберите  <strong>первый день</strong>.</p> }
-                { from && !to && <p>Пожалуйста, выберите  <strong>последний день</strong>. Первый день - {moment(from).format('LL')}</p> }
-                { from && to &&
+                {!from && !to && <p>Пожалуйста, выберите  <strong>первый день</strong>.</p>}
+                {from && !to && <p>Пожалуйста, выберите  <strong>последний день</strong>. Первый день - {moment(from).format('LL')}</p>}
+                {from && to &&
                 <p>
                     Вы выбрали даты с { moment(from).format('LL') } до { moment(to).format('LL') } <a href="#" onClick = {this.handleResetClick}>Выбрать заново</a>
-                </p>
-                }
+                </p>}
                 <DayPicker
                     numberOfMonths = { 2 }
                     onDayClick = {this.handleDayClick}
                     selectedDays = { day => DateUtils.isDayInRange(day, { from, to }) }
                     locale={ 'ru' }
                     localeUtils={ ru_local }
-                />
+                    />
+            </div>;
+
+        moment.locale('ru');
+
+        return (
+            <div>
+                <Counter />
+                <Select options = {options} value={this.props.selected} onChange = {this.handleChange} multi={true}/>
+                <hr/>
+                {dayPicker}
                 <ArticleList articles = {this.props.articles} />
                 {/*<JqueryComponent items = {this.props.articles} ref= {this.getJQ} />*/}
             </div>
@@ -74,24 +77,23 @@ class Container extends Component {
     }
 
     handleDayClick = (e, day) => {
-        const range = DateUtils.addDayToRange(day, this.state);
-        this.setState(range);
+        const range = DateUtils.addDayToRange(day, this.props.daypicker);
+        this.props.dayPicker(range);
     }
 
     handleResetClick = (e) => {
         e.preventDefault();
-        this.setState({
-            from: null,
-            to: null
-        });
+        this.props.resetDayPicker();
     }
 }
 
 export default connect((state) => {
-    const { articles, selected } = state;
-    return { articles, selected };
+    const { articles, selected, daypicker } = state;
+    return { articles, selected, daypicker };
 }, {
-    changeSelect
+    changeSelect,
+    dayPicker,
+    resetDayPicker
 })(Container)
 
 /*
