@@ -28,7 +28,7 @@ class Container extends Component {
 
     render() {
 
-        const options = this.props.articles.map(article => ({
+        const options = this.props.articles.def.map(article => ({
             label: article.title,
             value: article.id
         }));
@@ -61,7 +61,7 @@ class Container extends Component {
                 <Select options = {options} value={this.props.selected} onChange = {this.handleChange} multi={true}/>
                 <hr/>
                 {dayPicker}
-                <ArticleList articles = {this.props.articles} />
+                <ArticleList articles = {this.props.articles.current} />
                 {/*<JqueryComponent items = {this.props.articles} ref= {this.getJQ} />*/}
             </div>
         )
