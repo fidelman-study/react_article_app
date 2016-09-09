@@ -47,7 +47,7 @@ class Container extends Component {
                 <DayPicker
                     numberOfMonths = { 2 }
                     onDayClick = {this.handleDayClick}
-                    selectedDays = { day => DateUtils.isDayInRange(day, { from, to }) }
+                    selectedDays = { day => DateUtils.isDayInRange(day, {from: from, to: to})}
                     locale={ 'ru' }
                     localeUtils={ ru_local }
                     />

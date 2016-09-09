@@ -19,7 +19,7 @@ class Article extends Component {
             <div>
                 <h3 style={{cursor: 'pointer'}}
                     onClick = {toggleOpen}>
-                    {article.title + ' '}
+                    {article.title + ' (' + article.date + ') '}
                     <a href = "#" onClick = {this.handleDelete}>
                         delete
                     </a>

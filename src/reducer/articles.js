@@ -1,6 +1,7 @@
-import { DELETE_ARTICLE, SELECT_FILTER } from '../constants';
+import { DELETE_ARTICLE, SELECT_FILTER, PICK_DATE, RESET_DAY_PICKER } from '../constants';
 import { articles as defaultArticles} from '../fixtures';
- 
+import moment from 'moment';
+
  export default (articles = {def:defaultArticles, current:defaultArticles}, action) => {
      const { type, payload, response, error } = action;
 
@@ -38,6 +39,23 @@ import { articles as defaultArticles} from '../fixtures';
                      def: articles.def
                  }
              }
+         case PICK_DATE:
+
+             const { from, to } = payload;
+
+             return {
+                 current: articles.def.filter(item => {
+                     return item.date > moment(from).format() && ((to) ? item.date < moment(to).format() : true);
+                 }),
+                 def: articles.def
+             };
+
+         case RESET_DAY_PICKER:
+             return {
+                 current: articles.def,
+                 def: articles.def
+             }
+
      }
 
      return articles
