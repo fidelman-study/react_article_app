@@ -1,8 +1,8 @@
 import { DELETE_ARTICLE, SELECT_FILTER, PICK_DATE, RESET_DAY_PICKER } from '../constants';
-import { articles as defaultArticles} from '../fixtures';
+import { normalizedArticles} from '../fixtures';
 import moment from 'moment';
 
- export default (articles = {def:defaultArticles, current:defaultArticles}, action) => {
+ export default (articles = {def:normalizedArticles, current:normalizedArticles}, action) => {
      const { type, payload, response, error } = action;
 
      switch (type) {

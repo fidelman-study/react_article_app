@@ -7,7 +7,7 @@ import ComponentCount from './ComponentCount';
 class CommentList extends Component {
 
 	render() {
-		const commentItems = this.props.comments.map(commentObject => <li key = {commentObject.id}><Comment comment = {commentObject} /></li>);
+		const commentItems = this.props.comments.map(commentId => <li key = {commentId}><Comment commentId = {commentId} /></li>);
 
 		const toggler = commentItems.length 
 			? 

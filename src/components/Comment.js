@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-export default class Comment extends Component {
+class Comment extends Component {
 
 	render() {
 		
@@ -22,3 +23,10 @@ Comment.propTypes = {
 		id: PropTypes.number.isRequired
 	}).isRequired
 };
+
+
+export default connect(({ comments }, props) => {
+	return {
+		comment: comments.find(comment => comment.id == props.commentId)
+	}
+})(Comment);
