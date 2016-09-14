@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
-import counterReducer from './counter';
-import articleReducer from './articles';
-import selectorReducer from './selector';
-import daypickerReducer from './daypicker';
+import count from './counter';
+import articles from './articles';
 import comments from './comments';
+import filters from './filter';
 
 export default combineReducers({
-	count: counterReducer,
-	articles: articleReducer,
-	selected: selectorReducer,
-	daypicker: daypickerReducer,
-	comments
+	count,
+	articles,
+	comments,
+	filters
 });

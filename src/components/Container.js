@@ -18,24 +18,28 @@ class Container extends Component {
         return (
             <div>
                 <Counter />
-                <Filter articles = {this.props.articles.def}/>
-                <ArticleList articles = {this.props.articles.current} />
+                <Filter />
+                <ArticleList articles = {this.props.articles} />
             </div>
         )
     }
 
     getJQ = (ref) => {
         this.jqRef = ref;
-        console.log('---', findDOMNode(ref));
     };
 }
 
 export default connect((state) => {
-    const { articles } = state;
-    return { articles };
-}, {
-
+    const { articles, filters: { selected, dates } } = state;
+    //const { articles } = state;
+    const filteredArticles = articles.filter(article => !selected.length || selected.includes(article.id)).filter(article => {
+            const publisingDate = Date.parse(article.date)
+            return (!dates.from || dates.from < publisingDate) && (!dates.to || dates.to > publisingDate)
+        });
+    return { articles: filteredArticles };
+    //return {articles};
 })(Container)
+
 
 /*
  Вставка сторонних компонентов

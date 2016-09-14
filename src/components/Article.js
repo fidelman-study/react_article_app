@@ -31,7 +31,7 @@ class Article extends Component {
 
     handleDelete = ev => {
          ev.preventDefault()
-         const { deleteArticle, article } = this.props
+         const { deleteArticle, article } = this.props;
          deleteArticle(article.id)
      }
 
