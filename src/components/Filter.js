@@ -20,8 +20,8 @@ class Container extends  Component {
 
         return (
             <div>
-                <Select options = {options} value={filters.selected} onChange = {this.handleChange} multi={true}/>
-                <Daypicker dates = {filters.dates} changeDates = {changeDateFilter} />
+                <Select options = {options} value={filters.get('selected')} onChange = {this.handleChange} multi={true}/>
+                <Daypicker dates = {filters.get('dates')} changeDates = {changeDateFilter} />
             </div>
 
 

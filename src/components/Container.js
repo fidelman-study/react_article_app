@@ -30,14 +30,18 @@ class Container extends Component {
 }
 
 export default connect((state) => {
-    const { articles, filters: { selected, dates } } = state;
-    //const { articles } = state;
+    const { articles, filters } = state;
+
+    const selected = filters.get('selected');
+    const dates = filters.get('dates');
+
+
     const filteredArticles = articles.filter(article => !selected.length || selected.includes(article.id)).filter(article => {
             const publisingDate = Date.parse(article.date)
             return (!dates.from || dates.from < publisingDate) && (!dates.to || dates.to > publisingDate)
         });
     return { articles: filteredArticles };
-    //return {articles};
+
 })(Container)
 
 

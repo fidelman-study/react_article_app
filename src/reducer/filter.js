@@ -1,24 +1,26 @@
 import { SELECT_FILTER, PICK_DATE, RESET_DAY_PICKER } from '../constants';
+import { Map } from 'immutable';
 
-const defaultFilters = {
+const defaultFilters = new Map ({
     selected: [],
     dates: {
         from: null,
         to: null
     }
-}
+});
 
 export default (filters = defaultFilters, action) => {
-    const { type, payload, response, error } = action
-    console.log(type);
+    const { type, payload, response, error } = action;
+
     switch (type) {
         case SELECT_FILTER:
-            return { ...filters, selected: payload.ids }
+            return filters.set('selected', payload.ids);
 
         case PICK_DATE:
-            return { ...filters, ...payload }
+            return filters.set('dates', payload.dates);
+
         case RESET_DAY_PICKER:
-            return {...defaultFilters }
+            return defaultFilters;
     }
 
     return filters;
