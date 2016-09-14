@@ -1,10 +1,12 @@
-.article {
+.article-appear,
+.article-enter{
     opacity: 0;
 }
 
-.article-enter.article-enter-active {
+.article-appear.article-appear-active,
+.article-enter.article-enter-active{
     opacity: 1;
-    transition: opacity 500ms ease-in;
+    transition: opacity 300ms ease-in;
 }
 
 .article-leave {

@@ -22,7 +22,15 @@ class ArticleList extends Component {
 				</li>));
 
 		return (
-	        <CSSTransition transitionName = 'article' transitionLeaveTimeout = {1000} transitionEnterTimeout = {500}>
+	        <CSSTransition
+				component = 'ul'
+				transitionName = 'article'
+				transitionAppear = {true}
+				transitionAppearTimeout = {0}
+				transitionLeaveTimeout = {300}
+				transitionEnterTimeout = {0}
+
+			>
 	            {articleItems}
 	        </CSSTransition>
 	    );
