@@ -13,7 +13,7 @@ class Article extends Component {
         const body = isOpen ? 
             <section>
                 {article.text}
-                <CommentList comments = {comments} />
+                <CommentList article = {article} />
             </section> : null;
         return (
             <div>

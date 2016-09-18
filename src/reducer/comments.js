@@ -1,4 +1,4 @@
-import {} from '../constants';
+import { ADD_NEW_COMMENT } from '../constants';
 import { normalizedComments } from '../fixtures';
 import { Record, List } from 'immutable';
 
@@ -13,5 +13,9 @@ const immutableComments = new List(normalizedComments.map(comment => new Comment
 export default (comments = immutableComments, action) => {
     const { type, payload } = action;
 
+    switch(type) {
+        case ADD_NEW_COMMENT:
+            return comments.push({...payload.comment, id: action.randomId});
+    }
     return comments;
 }

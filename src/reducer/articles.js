@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE } from '../constants';
+import { DELETE_ARTICLE, ADD_NEW_COMMENT } from '../constants';
 import { normalizedArticles} from '../fixtures';
 import { Record, OrderedMap } from 'immutable';
 
@@ -18,6 +18,9 @@ const articlesMap = normalizedArticles.reduce((acc, article) => acc.set(article.
      switch (type) {
          case DELETE_ARTICLE:
  			return articles.delete(payload.id);
+
+         case ADD_NEW_COMMENT:
+            return articles.updateIn([payload.articleId, 'comments'], comments => comments.concat(action.randomId));
      }
 
      return articles

@@ -2,25 +2,32 @@ import React , { Component, PropTypes } from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
 import ComponentCount from './ComponentCount';
-
+import NewComment from './NewComment';
 
 class CommentList extends Component {
 
 	render() {
-		const commentItems = this.props.comments.map(commentId => <li key = {commentId}><Comment commentId = {commentId} /></li>);
+
+		const { article, toggleOpen, isOpen } = this.props;
+		const comments = article.comments;
+
+		const commentItems = comments.map(commentId => <li key = {commentId}><Comment commentId = {commentId} /></li>);
 
 		const toggler = commentItems.length 
 			? 
-			<a onClick = {this.props.toggleOpen} href = "#">
-				{this.props.isOpen ? 'Hide comments ' : 'Show comments '}
+			<a onClick = {toggleOpen} href = "#">
+				{isOpen ? 'Hide comments ' : 'Show comments '}
 				<ComponentCount count = {commentItems.length}/>
 			</a> 
 			:
-			null;
+			<NewComment articleId = {article.id} />;
 
-		const comment = this.props.isOpen
+		const comment = isOpen
 					?
-					<ul>{commentItems}</ul>
+					<div>
+						<ul>{commentItems}</ul>
+						<NewComment articleId = {article.id} />
+					</div>
 					:
 					null;
 
@@ -28,14 +35,13 @@ class CommentList extends Component {
 			<div>
 				{toggler}
 				{comment}
-
 			</div>
 		);
 	}
 };
 
 CommentList.propTypes = {
-	comments: PropTypes.array,
+	article: PropTypes.object,
 	isOpen: PropTypes.bool.isRequired,
 	toggleOpen: PropTypes.func.isRequired
 };

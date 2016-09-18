@@ -3,3 +3,4 @@ export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const SELECT_FILTER = 'SELECT_FILTER';
 export const PICK_DATE = 'PICK_DATE';
 export const RESET_DAY_PICKER = 'RESET_DAY_PICKER';
+export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
