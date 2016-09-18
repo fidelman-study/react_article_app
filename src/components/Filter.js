@@ -12,11 +12,10 @@ class Container extends  Component {
     render() {
 
         const { articles, filters, changeDateFilter } = this.props;
-
-        const options = articles.map(article => ({
-            label: article.title,
-            value: article.id
-        }));
+        const options = articles.valueSeq().map(article => ({
+            label: article.get('title'),
+            value: article.get('id')
+        })).toJS();
 
         return (
             <div>

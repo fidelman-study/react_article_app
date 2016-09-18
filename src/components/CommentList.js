@@ -28,6 +28,7 @@ class CommentList extends Component {
 			<div>
 				{toggler}
 				{comment}
+
 			</div>
 		);
 	}

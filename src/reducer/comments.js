@@ -8,7 +8,7 @@ const CommentModel = new Record({
     text: ''
 });
 
-const immutableComments = new  List(normalizedComments.map(comment => new CommentModel(comment)));
+const immutableComments = new List(normalizedComments.map(comment => new CommentModel(comment)));
 
 export default (comments = immutableComments, action) => {
     const { type, payload } = action;

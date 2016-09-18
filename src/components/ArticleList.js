@@ -9,7 +9,6 @@ class ArticleList extends Component {
 		
 
 		const { openArticleId, articles, toggleOpenArticle } = this.props;
-
 		const articleItems = articles.map(
 			articleObject => (
 				<li key = {articleObject.id}>
@@ -45,7 +44,7 @@ class ArticleList extends Component {
  //ты инициализируешь openArticleId: null. И оно ругаеться, что обязаетльно должна быть строка, а не приходит
 
 ArticleList.propTypes = {
-	articles: PropTypes.array,
+	articles: PropTypes.object,
 	toggleOpenArticle: PropTypes.func.isRequired,
 	openArticleId: PropTypes.string
 };

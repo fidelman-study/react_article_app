@@ -15,6 +15,7 @@ class Container extends Component {
     };
 
     render() {
+
         return (
             <div>
                 <Counter />
@@ -36,10 +37,12 @@ export default connect((state) => {
     const dates = filters.get('dates');
 
 
-    const filteredArticles = articles.filter(article => !selected.length || selected.includes(article.id)).filter(article => {
-            const publisingDate = Date.parse(article.date)
-            return (!dates.from || dates.from < publisingDate) && (!dates.to || dates.to > publisingDate)
-        });
+    const filteredArticles = articles.valueSeq()
+            .filter(article => !selected.length || selected.includes(article.id))
+            .filter(article => {
+                const publisingDate = Date.parse(article.date)
+                return (!dates.from || dates.from < publisingDate) && (!dates.to || dates.to > publisingDate)
+            });
     return { articles: filteredArticles };
 
 })(Container)
