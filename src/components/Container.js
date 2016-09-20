@@ -4,7 +4,7 @@ import ArticleList from './ArticleList';
 import JqueryComponent from './JqueryComponent';
 import {findDOMNode } from 'react-dom';
 
-import { loadArticles } from '../AC/articles';
+import { loadArticles, loadlArticlesWithThunk } from '../AC/articles';
 
 import Counter from './Counter';
 import Filter from './Filter';
@@ -17,7 +17,8 @@ class Container extends Component {
 
     componentDidMount() {
         const { loaded, loadindg } = this.props;
-        if (!loaded && !loadindg) this.props.loadArticles('/api/article');
+        //if (!loaded && !loadindg) this.props.loadArticles('/api/article');
+        if (!loaded && !loadindg) this.props.loadlArticlesWithThunk('/api/article');
     }
 
     render() {
@@ -57,7 +58,8 @@ export default connect((state) => {
     return { articles: filteredArticles, loading, loaded };
 
 },{
-    loadArticles
+    loadArticles,
+    loadlArticlesWithThunk
 })(Container)
 
 

@@ -3,7 +3,8 @@ import { START, FAIL, SUCCESS } from '../constants';
 
 export default store => next => action => {
     const { callAPI, type, ...rest } = action;
-    if (!callAPI) return;
+
+    if (!callAPI) return next(action);
 
     next({
         type: type + START,
