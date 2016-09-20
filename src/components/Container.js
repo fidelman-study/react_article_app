@@ -16,16 +16,19 @@ class Container extends Component {
     };
 
     componentDidMount() {
-        this.props.loadArticles('/api/article');
+        const { loaded, loadindg } = this.props;
+        if (!loaded && !loadindg) this.props.loadArticles('/api/article');
     }
 
     render() {
+
+        const { loading, loaded } = this.props;
 
         return (
             <div>
                 <Counter />
                 <Filter />
-                <ArticleList articles = {this.props.articles} />
+                <ArticleList articles = {this.props.articles} loading = {loading} />
             </div>
         )
     }
@@ -41,14 +44,17 @@ export default connect((state) => {
     const selected = filters.get('selected');
     const dates = filters.get('dates');
 
-
-    const filteredArticles = articles.valueSeq()
+    const filteredArticles = articles.get('entities').valueSeq()
             .filter(article => !selected.length || selected.includes(article.id))
             .filter(article => {
                 const publisingDate = Date.parse(article.date)
                 return (!dates.from || dates.from < publisingDate) && (!dates.to || dates.to > publisingDate)
             });
-    return { articles: filteredArticles };
+
+    const loading = articles.get('loading');
+    const loaded = articles.get('loaded');
+
+    return { articles: filteredArticles, loading, loaded };
 
 },{
     loadArticles

@@ -8,7 +8,10 @@ class ArticleList extends Component {
 	render() {
 		
 
-		const { openArticleId, articles, toggleOpenArticle } = this.props;
+		const { openArticleId, articles, toggleOpenArticle, loading } = this.props;
+
+		if (loading) return <h1>Loading...</h1>;
+
 		const articleItems = articles.map(
 			articleObject => (
 				<li key = {articleObject.id}>
@@ -46,7 +49,8 @@ class ArticleList extends Component {
 ArticleList.propTypes = {
 	articles: PropTypes.object,
 	toggleOpenArticle: PropTypes.func.isRequired,
-	openArticleId: PropTypes.string
+	openArticleId: PropTypes.string,
+	loading: PropTypes.bool
 };
 
 

@@ -10,19 +10,22 @@ export default store => next => action => {
         ...rest
     });
 
-    $.get(callAPI)
-        .done(response => {
-            next({
-                ...rest,
-                type: type + SUCCESS,
-                response
-            });
-        })
-        .fail(error => {
-            next({
-                ...rest,
-                type: type + FAIL,
-                error
-            });
-        })
+    setTimeout(() => {
+        $.get(callAPI)
+            .done(response => {
+                next({
+                    ...rest,
+                    type: type + SUCCESS,
+                    response
+                });
+            })
+            .fail(error => {
+                next({
+                    ...rest,
+                    type: type + FAIL,
+                    error
+                });
+            })
+    }, 1000);
+
 }
