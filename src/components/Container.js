@@ -4,6 +4,7 @@ import ArticleList from './ArticleList';
 import JqueryComponent from './JqueryComponent';
 import {findDOMNode } from 'react-dom';
 
+import { loadArticles } from '../AC/articles';
 
 import Counter from './Counter';
 import Filter from './Filter';
@@ -13,6 +14,10 @@ class Container extends Component {
     static propTypes = {
 
     };
+
+    componentDidMount() {
+        this.props.loadArticles('/api/article');
+    }
 
     render() {
 
@@ -45,6 +50,8 @@ export default connect((state) => {
             });
     return { articles: filteredArticles };
 
+},{
+    loadArticles
 })(Container)
 
 
