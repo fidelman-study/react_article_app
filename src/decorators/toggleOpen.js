@@ -9,10 +9,11 @@ export default (Component) => {
     };
 
     toggleOpen = (ev) => {
-      this.setState({
-          isOpen: !this.state.isOpen
-      });
-      if (ev) ev.preventDefault();
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+        if (ev) ev.preventDefault();
+        //console.log(this.props.article.id);
     }
 
 		render() {

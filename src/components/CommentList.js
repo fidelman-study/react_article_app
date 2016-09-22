@@ -10,7 +10,6 @@ class CommentList extends Component {
 
 		const { article, toggleOpen, isOpen } = this.props;
 		const comments = article.comments;
-
 		const commentItems = comments.map(commentId => <li key = {commentId}><Comment commentId = {commentId} /></li>);
 
 		const toggler = commentItems.length 

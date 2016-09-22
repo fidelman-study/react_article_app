@@ -9,6 +9,7 @@ const Article = new Record({
     title: '',
     text: '',
     loading: false,
+    loaded: false,
     comments: []
 });
 
@@ -46,9 +47,10 @@ const defaultState = new Map({
          case LOAD_ARTICLE_BY_ID + SUCCESS:
              return state
                  .setIn(['entities', payload.id], new Article(response))
-                 .set('loading', false);
+                 .setIn(['entities', payload.id, 'loaded'], true);
 
      }
+
 
      return state
  }

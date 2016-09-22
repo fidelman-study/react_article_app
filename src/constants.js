@@ -6,6 +6,7 @@ export const RESET_DAY_PICKER = 'RESET_DAY_PICKER';
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
 export const LOAD_ALL_ARTICLES = 'LOAD_ALL_ARTICLES';
 export const LOAD_ARTICLE_BY_ID = 'LOAD_ARTICLE_BY_ID';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const START = '_START';
 export const SUCCESS = '_SUCCESS';
 export const FAIL = '_FAIL';

@@ -8,7 +8,7 @@ import { deleteArticle, loadArticlesById } from '../AC/articles'
 class Article extends Component {
 
     componentWillReceiveProps({ isOpen, loadArticlesById, article }) {
-        if(isOpen && !this.props.isOpen) loadArticlesById('/api/article',article.id);
+        if(isOpen && !this.props.isOpen && !article.loaded) loadArticlesById('/api/article',article.id);
     }
 
     render() {
