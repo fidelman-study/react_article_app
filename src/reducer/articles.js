@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, ADD_NEW_COMMENT,LOAD_ARTICLE_BY_ID, LOAD_ALL_ARTICLES, START, SUCCESS, FAIL } from '../constants';
+import { DELETE_ARTICLE, ADD_NEW_COMMENT,LOAD_ARTICLE_BY_ID, LOAD_COMMENTS, LOAD_ALL_ARTICLES, START, SUCCESS, FAIL } from '../constants';
 import { normalizedArticles} from '../fixtures';
 import { Record, OrderedMap, Map } from 'immutable';
 import { arrayToMap } from '../utils';
@@ -10,6 +10,8 @@ const Article = new Record({
     text: '',
     loading: false,
     loaded: false,
+    commentsLoading: false,
+    commentsLoaded: false,
     comments: []
 });
 
@@ -27,8 +29,8 @@ const defaultState = new Map({
  			return state.update('entities', entities => entities.delete(payload.id));
 
          case ADD_NEW_COMMENT:
-            return articles.updateIn(
-                ['entities', payload.articleId, 'comments'],
+            return state.updateIn(
+                ['entities', payload.id, 'comments'],
                 comments => comments.concat(action.randomId)
             );
 
@@ -48,6 +50,12 @@ const defaultState = new Map({
              return state
                  .setIn(['entities', payload.id], new Article(response))
                  .setIn(['entities', payload.id, 'loaded'], true);
+
+         case LOAD_COMMENTS + START:
+             return state.setIn(['entities', payload.id, 'commentsLoading'], true);
+
+         case LOAD_COMMENTS + SUCCESS:
+             return state.setIn(['entities', payload.id, 'commentsLoaded'], true);
 
      }
 

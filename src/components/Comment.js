@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 class Comment extends Component {
 
+
+
 	render() {
 		
 		const { comment } = this.props;
@@ -26,6 +28,6 @@ Comment.propTypes = {
 
 export default connect(({ comments }, props) => {
 	return {
-		comment: comments.find(comment => comment.id == props.commentId)
+		comment: comments.getIn(['entities', props.commentId])
 	}
 })(Comment);

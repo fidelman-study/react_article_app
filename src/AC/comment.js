@@ -1,16 +1,16 @@
 import {ADD_NEW_COMMENT, LOAD_COMMENTS} from '../constants';
 
-export default function addNewComment(comment, articleId) {
+export default function addNewComment(comment, id) {
     return {
         type: ADD_NEW_COMMENT,
         payload: {
-            comment, articleId
+            comment, id
         },
         generateRandomId: true
     }
 }
 
-export default function loadComments(callAPI, id) {
+export function loadComments(callAPI, id) {
     return {
         type: LOAD_COMMENTS,
         payload: {id},
