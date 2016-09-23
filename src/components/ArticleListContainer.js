@@ -6,8 +6,6 @@ import {findDOMNode } from 'react-dom';
 
 import { loadArticles, loadlArticlesWithThunk } from '../AC/articles';
 
-import Counter from './Counter';
-import Filter from './Filter';
 import { connect } from 'react-redux';
 
 class Container extends Component {
@@ -27,8 +25,6 @@ class Container extends Component {
 
         return (
             <div>
-                <Counter />
-                <Filter />
                 <ArticleList articles = {this.props.articles} loading = {loading} />
             </div>
         )
@@ -36,6 +32,7 @@ class Container extends Component {
 
     getJQ = (ref) => {
         this.jqRef = ref;
+        console.log(findDOMNode(ref));
     };
 }
 
