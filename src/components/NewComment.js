@@ -3,28 +3,28 @@ import addNewComment from '../AC/comment';
 import { connect } from 'react-redux';
 
 class NewComment extends Component {
-    static propTypes = {
 
+    static contextTypes = {
+        user: PropTypes.string
     };
 
     state = {
-        user: '',
         text: ''
     };
 
     render() {
 
-        const {user, text} = this.state;
+        const {text} = this.state;
 
         return(
             <form onSubmit={this.handleSubmit}>
                 <strong>Add comment – </strong>
-                <input
+                {/*<input
                     type="text"
                     placeholder="user"
                     value = {user}
                     onChange = {this.handleChange('user')}
-                />
+                />*/}
                 <input
                     type="text"
                     placeholder="text"
@@ -44,15 +44,11 @@ class NewComment extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault();
-        const {user, text} = this.state;
+        const { text } = this.state;
         const { addNewComment, articleId } = this.props;
-
-        if(user && text) {
-            addNewComment(this.state, articleId);
-            this.setState({
-                user: '',
-                text: ''
-            });
+        const { user } = this.context;
+        if(text) {
+            addNewComment({ user, text }, articleId);
         } else {
             alert('Please, type your name and comment text');
         }

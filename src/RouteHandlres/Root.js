@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import store from '../store';
 import { Provider } from 'react-redux';
 import { Link } from 'react-router';
 
 class Root extends Component {
+
     render() {
         return(
             <Provider store = { store }>

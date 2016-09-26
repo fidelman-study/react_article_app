@@ -55,7 +55,8 @@ export default connect((state) => {
 },{
     loadArticles,
     loadArticlesWithThunk
-})(Container)
+}, null, {pure: false} // when you don't check the props for the context
+)(Container)
 
 
 /*

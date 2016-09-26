@@ -12,6 +12,7 @@ class Article extends Component {
         toggleOpen: PropTypes.func
     };
 
+
     render() {
         const { article, isOpen, toggleOpen } = this.props;
         if (!article || article.loading) return <h1>Loading...</h1>;

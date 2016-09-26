@@ -6,6 +6,12 @@ import { Link } from 'react-router';
 
 class ArticleList extends Component {
 
+
+	static contextTypes = {
+		user: PropTypes.string,
+		router: PropTypes.object
+	}
+
 	render() {
 		
 
@@ -15,21 +21,26 @@ class ArticleList extends Component {
 
 		const articleItems = articles.map(
 			articleObject => (
-				<li key = {articleObject.id}>
+				<li key = {articleObject.id}
+					style = {{color: this.context.router.isActive(`/articles/${articleObject.id}`) ? 'red' : 'black'}}>
 					<Link to = {`/articles/${articleObject.id}`} activeStyle = {{color: 'red'}}>{articleObject.title}</Link>
 				</li>));
 
 		return (
-	        <CSSTransition
-				component = 'ul'
-				transitionName = 'article'
-				transitionAppear = {true}
-				transitionAppearTimeout = {0}
-				transitionLeaveTimeout = {300}
-				transitionEnterTimeout = {0}
-			>
-	            {articleItems}
-	        </CSSTransition>
+			<div>
+				{this.context.user}
+				<CSSTransition
+					component = 'ul'
+					transitionName = 'article'
+					transitionAppear = {true}
+					transitionAppearTimeout = {0}
+					transitionLeaveTimeout = {300}
+					transitionEnterTimeout = {0}
+				>
+					{articleItems}
+				</CSSTransition>
+			</div>
+
 	    );
 	}   
 }
