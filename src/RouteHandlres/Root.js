@@ -9,10 +9,10 @@ class Root extends Component {
             <Provider store = { store }>
                 <div>
                     <ul>
-                        <li><Link to ="/articles">Articles</Link></li>
-                        <li><Link to ="/filter" >Filter</Link></li>
-                        <li><Link to ="/counter" >Counter</Link></li>
-                        <li><Link to ="/comments" >Comments</Link></li>
+                        <li><Link activeClassName="active" activeStyle = {{color: 'red'}} to ="/articles">Articles</Link></li>
+                        <li><Link activeStyle = {{color: 'red'}} to ="/filter" >Filter</Link></li>
+                        <li><Link activeStyle = {{color: 'red'}} to ="/counter" >Counter</Link></li>
+                        <li><Link activeStyle = {{color: 'red'}} to ="/comments" >Comments</Link></li>
                     </ul>
                     {this.props.children}
                 </div>
