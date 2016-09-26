@@ -4,7 +4,7 @@ import ArticleList from './ArticleList';
 import JqueryComponent from './JqueryComponent';
 import {findDOMNode } from 'react-dom';
 
-import { loadArticles, loadlArticlesWithThunk } from '../AC/articles';
+import { loadArticles, loadArticlesWithThunk } from '../AC/articles';
 
 import { connect } from 'react-redux';
 
@@ -14,19 +14,17 @@ class Container extends Component {
     };
 
     componentDidMount() {
-        const { loaded, loadindg } = this.props;
+        const { loaded, loadindg, loadArticlesWithThunk } = this.props;
         //if (!loaded && !loadindg) this.props.loadArticles('/api/article');
-        if (!loaded && !loadindg) this.props.loadlArticlesWithThunk('/api/article');
+        if (!loaded && !loadindg) loadArticlesWithThunk('/api/article');
     }
 
     render() {
 
-        const { loading, loaded } = this.props;
+        const { loading, articles } = this.props;
 
         return (
-            <div>
-                <ArticleList articles = {this.props.articles} loading = {loading} />
-            </div>
+            <ArticleList articles = {articles} loading = {loading} />
         )
     }
 
@@ -56,7 +54,7 @@ export default connect((state) => {
 
 },{
     loadArticles,
-    loadlArticlesWithThunk
+    loadArticlesWithThunk
 })(Container)
 
 

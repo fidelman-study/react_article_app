@@ -1,26 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import Article from './Article';
-import toggleOpenArticle from '../decorators/toggleOpenArticle';
 import CSSTransition from 'react-addons-css-transition-group';
 import './articleList.css';
+import { Link } from 'react-router';
+
+
 class ArticleList extends Component {
 
 	render() {
 		
 
-		const { openArticleId, articles, toggleOpenArticle, loading } = this.props;
+		const { articles, loading } = this.props;
 
 		if (loading) return <h1>Loading...</h1>;
 
 		const articleItems = articles.map(
 			articleObject => (
 				<li key = {articleObject.id}>
-					<Article 
-						comments = {articleObject.comments ? articleObject.comments : []} 
-						article = {articleObject} 
-						isOpen = {openArticleId === articleObject.id}
-						toggleOpen = {toggleOpenArticle(articleObject.id)}
-					/> 
+					<Link to = {`/articles/${articleObject.id}`}>{articleObject.title}</Link>
 				</li>));
 
 		return (
@@ -31,7 +27,6 @@ class ArticleList extends Component {
 				transitionAppearTimeout = {0}
 				transitionLeaveTimeout = {300}
 				transitionEnterTimeout = {0}
-
 			>
 	            {articleItems}
 	        </CSSTransition>
@@ -47,12 +42,10 @@ class ArticleList extends Component {
  //ты инициализируешь openArticleId: null. И оно ругаеться, что обязаетльно должна быть строка, а не приходит
 
 ArticleList.propTypes = {
-	articles: PropTypes.object,
-	toggleOpenArticle: PropTypes.func.isRequired,
-	openArticleId: PropTypes.string,
+	articles: PropTypes.object.isRequired,
 	loading: PropTypes.bool
 };
 
 
 
-export default toggleOpenArticle(ArticleList);
+export default ArticleList;

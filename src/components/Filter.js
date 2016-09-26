@@ -36,7 +36,7 @@ class Container extends  Component {
 
 export default connect((state) => {
     const { articles, filters } = state;
-    return { articles, filters };
+    return { articles: articles.get('entities'), filters };
 }, {
     changeSelectedFilter,
     changeDateFilter

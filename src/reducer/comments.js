@@ -1,4 +1,4 @@
-import { ADD_NEW_COMMENT, LOAD_COMMENTS, START, SUCCESS } from '../constants';
+import { ADD_NEW_COMMENT, LOAD_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS } from '../constants';
 import { normalizedComments } from '../fixtures';
 import { Record, List, Map, OrderedMap } from 'immutable';
 import { arrayToMap } from '../utils';
@@ -22,9 +22,22 @@ export default (state = defaultState, action) => {
         case ADD_NEW_COMMENT:
             //return state.push({...payload.comment, id: action.randomId});
             return state.update('entities', entities => entities.set(action.randomId, new CommentModel(payload.comment)))
+
         case LOAD_COMMENTS + SUCCESS:
+            return state.update('entities', entities => entities.merge(arrayToMap(response, CommentModel)));
+
+        case LOAD_COMMENTS_FOR_PAGE + START:
+            return state.setIn(['pagination', payload.page], new List([]))
+
+        case LOAD_COMMENTS_FOR_PAGE + SUCCESS:
             return state
-                .update('entities', entities => entities.merge(arrayToMap(response, CommentModel)));
+                .update('entities', entities => entities.merge(arrayToMap(response.records, CommentModel)))
+                .setIn(['pagination', payload.page], new List(response.records.map(record => record.id)))
+                .set('total', response.total)
     }
     return state;
 }
+
+
+
+

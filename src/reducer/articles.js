@@ -9,7 +9,6 @@ const Article = new Record({
     title: '',
     text: '',
     loading: false,
-    loaded: false,
     commentsLoading: false,
     commentsLoaded: false,
     comments: []
@@ -44,18 +43,19 @@ const defaultState = new Map({
                  .set('loaded', true);
 
          case LOAD_ARTICLE_BY_ID + START:
-             return state.updateIn(['entities', payload.id], article => article.set('loading', true));
+             return state.updateIn(['entities', payload.id], new Article({}), article => article.set('loading', true));
 
          case LOAD_ARTICLE_BY_ID + SUCCESS:
              return state
-                 .setIn(['entities', payload.id], new Article(response))
-                 .setIn(['entities', payload.id, 'loaded'], true);
+                 .setIn(['entities', payload.id], new Article({...response, loaded: true}));
 
          case LOAD_COMMENTS + START:
              return state.setIn(['entities', payload.id, 'commentsLoading'], true);
 
          case LOAD_COMMENTS + SUCCESS:
-             return state.setIn(['entities', payload.id, 'commentsLoaded'], true);
+             return state
+                 .setIn(['entities', payload.id, 'commentsLoaded'], true)
+                 .setIn(['entities', payload.id, 'commentsLoading'], false);
 
      }
 

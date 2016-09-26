@@ -1,4 +1,4 @@
-import {ADD_NEW_COMMENT, LOAD_COMMENTS} from '../constants';
+import {ADD_NEW_COMMENT, LOAD_COMMENTS, LOAD_COMMENTS_FOR_PAGE} from '../constants';
 
 export default function addNewComment(comment, id) {
     return {
@@ -15,5 +15,13 @@ export function loadComments(callAPI, id) {
         type: LOAD_COMMENTS,
         payload: {id},
         callAPI: `${callAPI}?article=${id}`
+    }
+}
+
+export function loadCommentsForPage(page) {
+    return {
+        type: LOAD_COMMENTS_FOR_PAGE,
+        payload: { page },
+        callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
     }
 }

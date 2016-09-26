@@ -25,7 +25,7 @@ export function loadArticlesById(callAPI, id) {
     }
 }
 
-export function loadlArticlesWithThunk(callApi) {
+export function loadArticlesWithThunk(callApi) {
     return function(dispatch, getState) {
         dispatch({
             type: LOAD_ALL_ARTICLES + START
