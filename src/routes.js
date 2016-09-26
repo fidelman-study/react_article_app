@@ -9,6 +9,7 @@ import CommentsRoot from './RouteHandlres/CommentsRoot';
 import CommentsPage from './RouteHandlres/CommentsPage';
 import IndexArticlePage from './RouteHandlres/IndexArticlePage';
 import NotFoundPage from './RouteHandlres/NotFoundPage';
+import NewArticlePage from './RouteHandlres/NewArticlePage';
 
 export default (
     <Router history = {browserHistory}>
@@ -19,6 +20,7 @@ export default (
             <Route path="filter" component = {FiltersPage} />
             <Route path="articles" component = {ArticlesPage}>
                 <IndexRoute component = {IndexArticlePage} />
+                <Route path="new" component = {NewArticlePage} />
                 <Route path=":id" component = {ArticlePage} />
             </Route>
             <Redirect from="/comments" to="/comments/1" />
