@@ -10,6 +10,7 @@ import CommentsPage from './RouteHandlres/CommentsPage';
 import IndexArticlePage from './RouteHandlres/IndexArticlePage';
 import NotFoundPage from './RouteHandlres/NotFoundPage';
 import NewArticlePage from './RouteHandlres/NewArticlePage';
+import ArticleNotFound from './RouteHandlres/ArticleNotFound';
 
 export default (
     <Router history = {browserHistory}>
@@ -20,7 +21,13 @@ export default (
             <Route path="filter" component = {FiltersPage} />
             <Route path="articles" component = {ArticlesPage}>
                 <IndexRoute component = {IndexArticlePage} />
-                <Route path="new" component = {NewArticlePage} />
+                <Route path="new" component = {NewArticlePage}
+                    onEnter={(nextState, replace) => {
+                        console.log('---', nextState);
+                        replace('/articles');
+                    }}
+                />
+                <Route path="not_found" component = {ArticleNotFound} />
                 <Route path=":id" component = {ArticlePage} />
             </Route>
             <Redirect from="/comments" to="/comments/1" />

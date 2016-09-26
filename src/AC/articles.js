@@ -1,5 +1,6 @@
 import { DELETE_ARTICLE, LOAD_ALL_ARTICLES, START, FAIL, SUCCESS, LOAD_ARTICLE_BY_ID} from '../constants';
 import $ from 'jquery';
+import { browserHistory } from 'react-router';
 
 export function deleteArticle(id) {
     return {
@@ -18,10 +19,26 @@ export function loadArticles(callAPI) {
 }
 
 export function loadArticlesById(callAPI, id) {
-    return {
-        type: LOAD_ARTICLE_BY_ID,
-        payload: {id},
-        callAPI: `${callAPI}/${id}`
+
+    return function(dispatch, getState) {
+        dispatch({
+            type: LOAD_ARTICLE_BY_ID + START,
+            payload: {id}
+        });
+        $.get(`${callAPI}/${id}`)
+            .done(response => dispatch({
+                type: LOAD_ARTICLE_BY_ID + SUCCESS,
+                payload: {id},
+                response
+            }))
+            .fail(error => {
+                dispatch({
+                    type: LOAD_ARTICLE_BY_ID + FAIL,
+                    payload: {id},
+                    error
+                });
+                browserHistory.replace(`/articles/not_found?id=${id}`); // push/replace - remember/not
+            });
     }
 }
 
