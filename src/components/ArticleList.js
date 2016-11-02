@@ -46,6 +46,8 @@ class ArticleList extends Component {
 }
 
 
+
+
 /*
  * при указании openArticleId isRequired - ругается
  * это изз того, что эти свойства образуются после декоратора?
@@ -59,4 +61,5 @@ ArticleList.propTypes = {
 
 
 
-export default ArticleList;
+export default ArticleList
+

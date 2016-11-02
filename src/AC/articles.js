@@ -11,21 +11,22 @@ export function deleteArticle(id) {
     }
 }
 
-export function loadArticles(callAPI) {
+
+export function loadArticles() {
     return {
         type: LOAD_ALL_ARTICLES,
-        callAPI
+        callAPI: '/api/article'
     }
 }
 
-export function loadArticlesById(callAPI, id) {
+export function loadArticlesById(id) {
 
     return function(dispatch, getState) {
         dispatch({
             type: LOAD_ARTICLE_BY_ID + START,
             payload: {id}
         });
-        $.get(`${callAPI}/${id}`)
+        $.get(`/api/article/${id}`)
             .done(response => dispatch({
                 type: LOAD_ARTICLE_BY_ID + SUCCESS,
                 payload: {id},
@@ -42,12 +43,12 @@ export function loadArticlesById(callAPI, id) {
     }
 }
 
-export function loadArticlesWithThunk(callApi) {
+export function loadArticlesWithThunk() {
     return function(dispatch, getState) {
         dispatch({
             type: LOAD_ALL_ARTICLES + START
         });
-        $.get(callApi)
+        $.get('/api/article')
             .done(response => dispatch({
                 type: LOAD_ALL_ARTICLES + SUCCESS,
                 response

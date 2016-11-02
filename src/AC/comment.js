@@ -10,11 +10,11 @@ export default function addNewComment(comment, id) {
     }
 }
 
-export function loadComments(callAPI, id) {
+export function loadComments(id) {
     return {
         type: LOAD_COMMENTS,
         payload: {id},
-        callAPI: `${callAPI}?article=${id}`
+        callAPI: `/api/comment?article=${id}`
     }
 }
 

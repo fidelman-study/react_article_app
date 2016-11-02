@@ -14,8 +14,8 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         proxy: [{
-        path: '/api*/',
-        target: 'http://localhost:3001'
+            path: '/api/',
+            target: 'http://localhost:3001'
         }]
     },
     module: {

@@ -11,7 +11,7 @@ class ArticleContainer extends  Component {
 
     componentDidMount() {
         const { article, loadArticlesById, articleId } = this.props;
-        if(!article || !article.loaded) loadArticlesById('/api/article', articleId);
+        if(!article || !article.loaded) loadArticlesById(articleId);
     }
 
 

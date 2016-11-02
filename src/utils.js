@@ -1,5 +1,8 @@
-import {OrderedMap } from 'immutable';
+import { OrderedMap } from 'immutable'
+
 
 export function arrayToMap(array, RecordModel) {
-    return array.reduce((acc, article) => acc.set(article.id, new RecordModel(article)), new OrderedMap({}));
+    return array.reduce((acc, item) => {
+        return acc.set(item.id, new RecordModel(item))
+    }, new OrderedMap({}))
 }

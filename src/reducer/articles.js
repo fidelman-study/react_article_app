@@ -22,7 +22,6 @@ const defaultState = new Map({
 
  export default (state = defaultState, action) => {
      const { type, payload, response, error } = action;
-
      switch (type) {
          case DELETE_ARTICLE:
  			return state.update('entities', entities => entities.delete(payload.id));
